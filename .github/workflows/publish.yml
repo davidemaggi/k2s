@@ -36,7 +36,8 @@ jobs:
           tag=$(git describe --tags --abbrev=0)
           release_name="k2s-$tag-${{ matrix.target }}"
           # Build everything
-          dotnet publish src/k2s/k2s.Cli/k2s.Cli.csproj --framework net6.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name"
+          
+          dotnet publish k2s/k2s.Cli/k2s.Cli.csproj --framework net6.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name"
           # Pack files
           if [ "${{ matrix.target }}" == "win-x64" ]; then
             # Pack to zip for Windows
