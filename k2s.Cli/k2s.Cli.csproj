@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Authors>Davide Maggi</Authors>
+    <AssemblyName>k2s</AssemblyName>
+    <PackageProjectUrl>https://github.com/davidemaggi/k2s</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/davidemaggi/k2s</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+    <PackageReference Include="Spectre.Console.Cli" Version="0.45.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\k2s.Data\k2s.Data.csproj" />
+    <ProjectReference Include="..\k2s.Kubernetes\k2s.Kube.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,31 @@
+{
+  "profiles": {
+    "k2s.Cli": {
+      "commandName": "Project"
+    },
+    "k2s.Cli info": {
+      "commandName": "Project",
+      "commandLineArgs": "info"
+    },
+    "k2s.Cli help": {
+      "commandName": "Project",
+      "commandLineArgs": "--help"
+    },
+    "k2s.Cli merge": {
+      "commandName": "Project",
+      "commandLineArgs": "merge \"C:\\Users\\Davide\\.kube\\altro\""
+    },
+    "k2s.Cli alias": {
+      "commandName": "Project",
+      "commandLineArgs": "alias"
+    },
+    "k2s.Cli delete": {
+      "commandName": "Project",
+      "commandLineArgs": "delete"
+    },
+    "k2s.Cli forward": {
+      "commandName": "Project",
+      "commandLineArgs": "fwd"
+    }
+  }
+}
