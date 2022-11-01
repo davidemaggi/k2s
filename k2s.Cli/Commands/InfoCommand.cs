@@ -10,6 +10,7 @@ using k2s.Kube;
 using k2s.Cli.Helpers;
 using k2s.Models.k8s;
 using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
 
 namespace k2s.Cli.Commands
 {
@@ -35,7 +36,7 @@ namespace k2s.Cli.Commands
         .LeftAligned()
         .Color(Color.Cyan1));
 
-            AnsiConsole.MarkupLine($"[grey]v{GetAssemblyVersion()}[/]");
+            AnsiConsole.MarkupLine($"[grey]v{GetAssemblyVersionInfo()}[/]");
             AnsiConsole.MarkupLine($"");
 
             var curCtx = _kube.GetCurrentContext();
@@ -126,6 +127,11 @@ namespace k2s.Cli.Commands
             return GetType().Assembly.GetName().Version.ToString();
         }
 
-
+        public string GetAssemblyVersionInfo()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var informationVersion = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+            return informationVersion;
+        }
     }
 }

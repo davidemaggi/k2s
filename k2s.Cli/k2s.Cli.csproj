@@ -7,6 +7,7 @@
     <Nullable>enable</Nullable>
 	  <Authors>Davide Maggi</Authors>
 	  <Version>1.2.3.4</Version>
+	  <InformationalVersion>1.2.3.4-blabla</InformationalVersion>
     <AssemblyName>k2s</AssemblyName>
     <PackageProjectUrl>https://github.com/davidemaggi/k2s</PackageProjectUrl>
     <RepositoryUrl>https://github.com/davidemaggi/k2s</RepositoryUrl>
