@@ -38,15 +38,13 @@ jobs:
           year=$(date +%Y)
           doy=$(date +%j)
           mod=$(echo 60*$(date +%H)+$(date +%M) | bc)
-          
-          versionTxt={tag:1}
-          arrIN=(${versionTxt//-/ })
-          vNumber=$arrIN[0]
+          versionTxt=${tag%?} 
+          vNumber=echo "$versionTxt" | cut -d "-" -f 1
+          versionTxt=${tag%?}
+          vNumber="$(echo '$versionTxt' | cut -d'-' -f1)"
 
-          echo "$versionTxt"
-          echo "${vNumber}.${year}${doy}${mod}"
-
-
+          echo "$versionTxt" 
+          echo "${vNumber::-3}.${year}${doy}${mod}"
           # Build everything
           dotnet publish k2s.Cli/k2s.Cli.csproj --framework net6.0 --runtime "${{ matrix.target }}" --self-contained -c Release -o "$release_name" /property:InformationalVersion="${versionTxt}" /property:Version="${vNumber}.${year}${doy}${mod}"
           # Pack files
