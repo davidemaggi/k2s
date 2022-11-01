@@ -41,7 +41,7 @@ jobs:
          
           versionTxt=${tag:1}
           vNumber=$(echo "$versionTxt" | cut -d "-" -f 1)
-          vTxt="${vNumber::-3}.${year}${doy}${mod}"
+          vTxt="${vNumber}.${year}${doy}${mod}"
 
           echo "$tag" 
           echo "$versionTxt" 
