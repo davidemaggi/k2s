@@ -26,8 +26,32 @@ namespace k2s.Kube
                 var namespaces = await GetClient(ctx).CoreV1.ListNamespaceAsync();
 
                 
-                return BaseResult<List<NamespaceModel>>.NewSuccess(_mapper.Map<List<NamespaceModel>>(namespaces.Items));
+                //return BaseResult<List<NamespaceModel>>.NewSuccess(_mapper.Map<List<NamespaceModel>>(namespaces.Items));
+
+                var ret = new List<NamespaceModel>();
+
+                foreach (var ns in namespaces)
+                {
+
+                    var tmp = _mapper.Map<NamespaceModel>(ns);
+
+
+
+                    if (tmp.Name == GetCurrentNameSpace(ctx).Content) { tmp.IsCurrent = true; }
+
+                    ret.Add(tmp);
+                }
+
+
+
+                return BaseResult<List<NamespaceModel>>.NewSuccess(ret.OrderByDescending(o => o.IsCurrent).ToList());
+
+
+
             }
+
+
+
             catch (Exception ex)
             {
 

@@ -13,9 +13,20 @@ namespace k2s.Kube
         public BaseResult<List<ContextModel>> GetContexts()
         {
 
-            return BaseResult<List<ContextModel>>.NewSuccess(_mapper.Map<List<ContextModel>>(_config.Contexts.ToList()));
+            var ret = new List<ContextModel>(); 
+
+            foreach (var context in _config.Contexts) {
+
+                var tmp = _mapper.Map<ContextModel>(context);
+
+                if (tmp.Name==_config.CurrentContext) { tmp.IsCurrent = true; }
+
+                ret.Add(tmp);
+            }
 
 
+
+            return BaseResult<List<ContextModel>>.NewSuccess(ret.OrderByDescending(o => o.IsCurrent).ToList());
         }
 
         public BaseResult<string> GetCurrentContext()

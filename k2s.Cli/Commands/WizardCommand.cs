@@ -38,6 +38,7 @@ namespace k2s.Cli.Commands
     new SelectionPrompt<string>()
         .Title("Which [green]Context[/]?")
         .PageSize(10)
+
         .MoreChoicesText("[grey](Move up and down to reveal more coontext)[/]")
         .AddChoices(contexts.Content.Select(x=>x.Name)));
 
