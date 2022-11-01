@@ -29,7 +29,7 @@ Expand-Archive -LiteralPath $x64File -DestinationPath $x64Dir
 
 # Sign the Exe File
 
-& $SignTool sign /tr https://timestamp.digicert.com /td SHA256 /fd SHA256 /f "cert.pfx" /p "$env:CODE_SIGN"  $x64Dir"\k2s.exe"
+& $SignTool sign /tr http://timestamp.sectigo.com /td SHA256 /fd SHA256 /f "cert.pfx" /p "$env:CODE_SIGN"  $x64Dir"\k2s.exe"
 
 Compress-Archive -Path $x64Dir\* -DestinationPath $x64Dir"-signed.zip"
 
