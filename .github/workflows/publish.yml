@@ -40,12 +40,12 @@ jobs:
           mod=$(echo 60*$(date +%H)+$(date +%M) | bc)
          
           versionTxt=${tag%?}
-          vNumber="$(echo '$versionTxt' | cut -d'-' -f1)"
+          vNumber=$(echo "$versionTxt" | cut -d"-" -f1)
 
           echo "$versionTxt" 
           echo "${vNumber::-3}.${year}${doy}${mod}"
           # Build everything
-          dotnet publish k2s.Cli/k2s.Cli.csproj --framework net6.0 --runtime "${{ matrix.target }}" --self-contained -c Release -o "$release_name" /property:InformationalVersion="${versionTxt}" /property:Version="${vNumber}.${year}${doy}${mod}"
+          dotnet publish k2s.Cli/k2s.Cli.csproj --framework net6.0 --runtime "${{ matrix.target }}" --self-contained -c Release -o "$release_name" /property:InformationalVersion="${versionTxt}" /property:Version="${vNumber::-3}.${year}${doy}${mod}"
           # Pack files
           if [ "${{ matrix.target }}" == "win-x64" ]; then
             # Pack to zip for Windows
