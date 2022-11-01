@@ -39,7 +39,7 @@ jobs:
           doy=$(date +%j)
           mod=$(echo 60*$(date +%H)+$(date +%M) | bc)
          
-          versionTxt=${tag%?}
+          versionTxt=${tag:1}
           vNumber=$(echo "$versionTxt" | cut -d "-" -f 1)
           vTxt="${vNumber::-3}.${year}${doy}${mod}"
 
