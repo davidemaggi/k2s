@@ -35,13 +35,13 @@ jobs:
         run: |
           tag=$(git describe --tags --abbrev=0)
           release_name="k2s-$tag-${{ matrix.target }}"
-          year=$(date +%Y)
+          year=$(date +%y)
           doy=$(date +%j)
-          mod=$(echo 60*$(date +%H)+$(date +%M) | bc)
+          
          
           versionTxt=${tag:1}
           vNumber=$(echo "$versionTxt" | cut -d "-" -f 1)
-          vTxt="${vNumber}.${year}${doy}${mod}"
+          vTxt="${vNumber}.${year}${doy}"
 
           echo "$tag" 
           echo "$versionTxt" 
