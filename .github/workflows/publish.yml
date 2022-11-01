@@ -48,7 +48,7 @@ jobs:
           tar czvf "${release_name}.tar.gz" "$release_name"
           fi
           # Delete output directory
-          rm "$release_name"
+          rm -rf "$release_name"
           rm -r "k2s.sln"
       - name: Publish
         uses: softprops/action-gh-release@v1
