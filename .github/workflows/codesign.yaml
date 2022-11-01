@@ -1,0 +1,17 @@
+name: Codesign
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v2
+      - name: Download, Sign & Upload to release
+        run: ./k2s.Tools/sign.ps1
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          CODE_SIGN: ${{ secrets.CODE_SIGN }}
+          RELEASE: ${{ github.ref_name}}
+          CERTIFICATE:  ${{ secrets.CERTIFICATE }}

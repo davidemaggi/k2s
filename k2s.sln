@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "k2s.Kube", "k2s.Kubernetes\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "k2s.Cli", "k2s.Cli\k2s.Cli.csproj", "{6A5CE095-E20E-4471-A10B-579402E5D52D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "k2s.Test", "k2s.Test\k2s.Test.csproj", "{DDE82B1C-9E1A-4C11-8A64-773E26B36370}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "k2s.Test", "k2s.Test\k2s.Test.csproj", "{DDE82B1C-9E1A-4C11-8A64-773E26B36370}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
