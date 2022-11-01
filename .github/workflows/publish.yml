@@ -17,9 +17,6 @@ jobs:
           - kind: windows
             os: windows-latest
             target: win-x64
-          - kind: linux
-            os: ubuntu-latest
-            target: linux-x86
           - kind: windows
             os: windows-latest
             target: win-x86
@@ -44,7 +41,7 @@ jobs:
           # Build everything
           dotnet publish k2s.Cli/k2s.Cli.csproj --framework net6.0 --runtime "${{ matrix.target }}" -c Release -o "$release_name"
           # Pack files
-          if [ "${{ matrix.target }}" == "win-x64" ]; then
+          if [ "${{ matrix.target }}" == "win-*" ]; then
             # Pack to zip for Windows
             7z a -tzip "${release_name}.zip" "./${release_name}/*"
           else
@@ -53,7 +50,7 @@ jobs:
           # Delete output directory
           rm -r "$release_name"
       - name: Publish
-        uses: phuonghuynh/action-ghrelease@v1.1.0
+        uses: softprops/action-gh-release@v1
         with:
           files: "k2s*"
         env:
