@@ -50,19 +50,6 @@ Or the raw yaml file if you are brave enough
 k2s info
 ```
 ![](https://github.com/davidemaggi/k2s/blob/main/imgs/readme/gif_info1.gif?raw=true)
-```shell
-k2s info --raw
-```
-![](https://github.com/davidemaggi/k2s/blob/main/imgs/readme/gif_info2.gif?raw=true)
-
-
-## Version
-Display the current k2s version
-```shell
-k2s --version
-```
-
-![](https://github.com/davidemaggi/k2s/blob/0dd7bc010eccf465cfbef1c01a2ddf79254b1086/imgs/readme/gif_version.gif?raw=true)
 
 ## Help
 Display the help view, if you are too lazy to read the previous instructions...
