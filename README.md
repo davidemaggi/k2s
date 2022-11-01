@@ -74,7 +74,7 @@ k2s help
 
 ## Global Flags
 
-WIP
+🚧 WIP 🚧
 
 ## Install
 
