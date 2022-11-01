@@ -30,7 +30,23 @@ namespace k2s.Cli.Commands
         {
             // details are omitted for brevity
             // the actual implementation parses HTML file and collects bots
-
+            AnsiConsole.Write(new Rows(
+                new Text("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣠⣤⣤⣄⣀⣀"), 
+new Text("⠀⠀⠀⠀⠀⠀⠀⣀⡴⠾⠛⠋⠉⠉⠁⠈⠉⠉⠙⠛⠷⢦⣄"),
+new Text("⠀⠀⠀⠀⢀⣴⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣦⡀"),
+new Text("⠀⠀⠀⣠⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡀⠈⠻⣄"),
+new Text("⠀⠀⣰⠏⠀⢀⣴⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣦⡀⠹⣆"),
+new Text("⠀⢰⡟⢀⣴⣿⣿⣿⣷⡄⠀⠀⠀⢀⣴⣷⣄⠀⣠⡿⠟⡿⠻⢿⡟⠻⣦⣻⡆"),
+new Text("⠀⣾⣷⡿⢟⣿⠟⣿⠈⠙⢦⣀⣴⣿⣿⣿⣿⣿⣯⡀⠀⠀⠀⠀⠈⠀⠈⠻⣷"),
+new Text("⠀⣿⠋⠀⠜⠁⠀⠈⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⣿"),
+new Text("⠀⢿⡄⠀⠀⠀⠀⠀⣠⣾⡿⣿⣿⢿⡟⢿⣧⠙⣿⠉⠻⢿⣦⡀⠀⠀⠀⢠⣿"),
+new Text("⠀⠸⣧⠀⠀⠀⣠⡾⠋⠁⢠⡟⠁⠈⠀⠈⢻⡄⠈⠀⠀⠀⠉⠻⣦⠀⠀⣸⠇"),
+new Text("⠀⠀⠹⡆⣠⡾⠋⠀⠀⠀⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠳⣴⡟"),
+new Text("⠀⠀⠀⠹⣟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⠏"),
+new Text("⠀⠀⠀⠀⠈⠳⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⠞⠁"),
+new Text("⠀⠀⠀⠀⠀⠀⠈⠙⠶⣤⣄⣀⡀⠀⠀⠀⠀⢀⣀⣠⣤⠶⠋⠁"),
+new Text("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⠛⠛⠛⠛⠛⠉⠉")
+                ));
             AnsiConsole.Write(
     new FigletText("k2s")
         .LeftAligned()
