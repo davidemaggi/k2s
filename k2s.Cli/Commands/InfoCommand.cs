@@ -35,7 +35,8 @@ namespace k2s.Cli.Commands
         .LeftAligned()
         .Color(Color.Cyan1));
 
-            
+            AnsiConsole.MarkupLine($"[grey]v{GetAssemblyVersion()}[/]");
+            AnsiConsole.MarkupLine($"");
 
             var curCtx = _kube.GetCurrentContext();
             ErrorHandler<string>.HandleResult(curCtx);
@@ -119,5 +120,12 @@ namespace k2s.Cli.Commands
 
             return 0;
         }
+
+        public string GetAssemblyVersion()
+        {
+            return GetType().Assembly.GetName().Version.ToString();
+        }
+
+
     }
 }

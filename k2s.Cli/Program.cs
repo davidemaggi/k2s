@@ -49,6 +49,8 @@ namespace k2s.Cli
 
                     config.AddCommand<InfoCommand>("info")
                   .WithAlias("i")
+                  .WithAlias("v")
+                  .WithAlias("version")
                   .WithDescription("Get info about the current configuration");
 
 
