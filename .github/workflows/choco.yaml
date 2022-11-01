@@ -1,14 +1,14 @@
-name: CD chocolatey
+name: Publish Chocolatey
 on: workflow_dispatch
 
 jobs:
-  build:
+  publish:
     runs-on: windows-latest
     steps:
       - name: Check out repo
         uses: actions/checkout@v2
       - name: Prepare & Upload to Chocolatey
-        run: ./deploy/chocolatey/release.ps1
+        run: ./k2s.Tools/Chocolatey/publish.ps1
         shell: pwsh
         env:
           CHOCO_TOKEN: ${{ secrets.CHOCO_TOKEN }}
