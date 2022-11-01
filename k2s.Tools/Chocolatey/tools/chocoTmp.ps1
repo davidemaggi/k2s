@@ -10,12 +10,12 @@ $hash64 = '@@HASH_X64@@'
 $packageArgs = @{
   packageName   = $packageName
   unzipLocation = $toolsDir
-  url64bit      = $url64
-#  url           = $url
-#  checksum      = $hash
-  checksum64    = $hash64
-#  checksumType  = 'MD5'
-  checksumType64  = 'MD5'
+  #url64bit      = $url64
+  url           = $url64
+  checksum      = $hash64
+  #checksum64    = $hash64
+  checksumType  = 'MD5'
+  #checksumType64  = 'MD5'
 }
 
 Install-ChocolateyZipPackage @packageArgs

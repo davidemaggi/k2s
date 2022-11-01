@@ -9,8 +9,6 @@ k2s
 ```
 ### Arrow Keys
 ![](https://github.com/davidemaggi/k2s/blob/main/imgs/readme/gif_wizard1.gif?raw=true)
-### With Filter
-![](https://github.com/davidemaggi/k2s/blob/main/imgs/readme/gif_wizard2.gif?raw=true)
 
 ## Merge
 >With great projects comes great clusters (cit. Uncle Ben).
@@ -76,11 +74,7 @@ k2s help
 
 ## Global Flags
 
-| Flag      | Alias | Optional | Description                                                                    | Default               |
-|-----------|:-----:|:-------:|--------------------------------------------------------------------------------|-----------------------|
-| --config  |  -c   |    x    | The config file to manage| $USERDIR/.kube/config |
-| --force   |  -f   |    x    | Perform the operation forcing it even if no actual action is needed            | false                 |
-| --verbose |  -v   |    x    | Display extended logs                                                          | false                 |
+WIP
 
 ## Install
 
