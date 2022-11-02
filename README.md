@@ -65,9 +65,9 @@ k2s help
 | Flag      | Alias | Optional | Description                                                                    | Default               |
 |-----------|:-----:|:-------:|--------------------------------------------------------------------------------|-----------------------|
 | --file  |  -f   |    x    | The config file to manage| $USERDIR/.kube/config |
-| --force   |  -f   |    x    | Perform the operation forcing it even if no actual action is needed  🚧WIP🚧           | false                 |
+| --force   |  -x   |    x    | Perform the operation forcing it   🚧WIP🚧           | false                 |
 | --verbose |  -v   |    x    | Display extended logs                                                          | false                 |
-| --kubectl |  -k   |    x    | return a kubectl compliant command of the desired action                                                          | false                 |
+| --kubectl |  -k   |    x    | return a kubectl compliant command of the desired action 🚧WIP🚧                                                          | false                 |
 ## Install
 
 k2s is making its first baby steps, It's available as standalone binaries for all major platforms that you can download and install by yourself, the only package manager from where you can download k2s is Chocolatey on windows.
