@@ -1,7 +1,8 @@
 {
   "profiles": {
     "k2s.Cli": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "-v"
     },
     "k2s.Cli info": {
       "commandName": "Project",
@@ -17,15 +18,15 @@
     },
     "k2s.Cli alias": {
       "commandName": "Project",
-      "commandLineArgs": "alias"
+      "commandLineArgs": "alias "
     },
     "k2s.Cli delete": {
       "commandName": "Project",
-      "commandLineArgs": "delete"
+      "commandLineArgs": "delete "
     },
     "k2s.Cli forward": {
       "commandName": "Project",
-      "commandLineArgs": "fwd"
+      "commandLineArgs": "fwd "
     }
   }
 }

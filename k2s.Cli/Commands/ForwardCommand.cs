@@ -12,7 +12,7 @@ using k2s.Models.k8s;
 
 namespace k2s.Cli.Commands
 {
-    public class ForwardCommandSettings : CommandSettings { }
+    public class ForwardCommandSettings : GlobalSettings { }
 
     public class ForwardCommand : AsyncCommand<ForwardCommandSettings>
     {
@@ -29,8 +29,10 @@ namespace k2s.Cli.Commands
             // details are omitted for brevity
             // the actual implementation parses HTML file and collects bots
 
+            Statics.setGlobals(settings);
 
-
+            var setOver = _kube.SetOverrideFile(settings.KubeConfigFile);
+            if (!setOver.isSuccess()) { Outputs.Warning("KubeConfig File", $"{setOver.Msg}"); }
 
 
             var fwdCtx = _kube.GetCurrentContext().Content;
@@ -91,8 +93,8 @@ namespace k2s.Cli.Commands
                 var localport = AnsiConsole.Ask<int>("On local [green]port[/]:");
 
                 //Outputs.Success("On Local Port", localport.ToString());
-                await _kube.PortForwardPod(fwdCtx, fwdNs, podfwd, port, localport);
-
+                var tmpFwd=await _kube.PortForwardPod(fwdCtx, fwdNs, podfwd, port, localport);
+                ErrorHandler.HandleResult(tmpFwd);
             }
             else {
 
@@ -122,8 +124,8 @@ namespace k2s.Cli.Commands
 
                 // Outputs.Success("On Local Port", localport.ToString());
 
-                await _kube.PortForwardService(fwdCtx,fwdNs,servicefwd,port,localport);
-
+                var tmpFwd=await _kube.PortForwardService(fwdCtx,fwdNs,servicefwd,port,localport);
+                ErrorHandler.HandleResult(tmpFwd);
             }
 
 

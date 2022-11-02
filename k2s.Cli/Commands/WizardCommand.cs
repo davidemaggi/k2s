@@ -12,7 +12,7 @@ using k2s.Models.k8s;
 
 namespace k2s.Cli.Commands
 {
-    public class WizardCommandSettings : CommandSettings { }
+    public class WizardCommandSettings : GlobalSettings { }
 
     public class WizardCommand : AsyncCommand<WizardCommandSettings>
     {
@@ -26,10 +26,13 @@ namespace k2s.Cli.Commands
 
         public override async Task<int> ExecuteAsync(CommandContext context, WizardCommandSettings settings)
         {
+            Statics.setGlobals(settings);
+
             // details are omitted for brevity
             // the actual implementation parses HTML file and collects bots
+            var setOver = _kube.SetOverrideFile(settings.KubeConfigFile);
+            if (!setOver.isSuccess()) { Outputs.Warning("KubeConfig File", $"{setOver.Msg}"); }
 
-            
 
             var contexts =  _kube.GetContexts();
             ErrorHandler<List<ContextModel>>.HandleResult(contexts);

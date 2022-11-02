@@ -24,12 +24,14 @@ namespace k2s.Kube
         private K8SConfiguration _config;
 
         private Dictionary<string,Kubernetes> _clients;
+        private string _overridePath="";
 
         public KubernetesService(IMapper mapper) {
             _mapper = mapper;
             
-            _clients = new Dictionary<string, Kubernetes>(); ;
+            _clients = new Dictionary<string, Kubernetes>(); 
             SetupClients();
+
         }
 
         private void SetupClients() {
@@ -62,7 +64,7 @@ namespace k2s.Kube
 
         public Kubernetes GetClient(string? name) => string.IsNullOrEmpty(name) ? _clients[GetCurrentContext().Content] : _clients[name];
 
-        public string GetConfigPath() => Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".kube","config");
+        public string GetConfigPath() => string.IsNullOrEmpty(_overridePath) ? Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".kube","config") : _overridePath;
 
         public K8SConfiguration ReadKubeConfig(string filePath)
         {
@@ -115,14 +117,28 @@ namespace k2s.Kube
             if (withSave) SaveKubeConfig();
 
 
-            return BaseResult.NewSuccess();
+            return BaseResult.NewSuccess($"Updated config");
 
         }
 
-        
+        public BaseResult SetOverrideFile(string file)
+        {
+            if (!string.IsNullOrEmpty(file)) { 
+            if (File.Exists(file))
+            {
+                _overridePath = file;
 
-        
 
+                SetupClients();
+            }
+            else {
 
+                return BaseResult.NewWarning($"Specified file doesn't exist, the default config will be used");
+
+            }
+            }
+
+            return BaseResult.NewSuccess($"Using custom file");
+        }
     }
 }

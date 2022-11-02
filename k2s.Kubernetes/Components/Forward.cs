@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using k2s.Models;
 
 namespace k2s.Kube
 {
@@ -14,7 +15,7 @@ namespace k2s.Kube
     {
 
 
-        public async Task PortForwardPod(string ctx, string ns, string podName, string podPort, int localPort) {
+        public async Task<BaseResult> PortForwardPod(string ctx, string ns, string podName, string podPort, int localPort) {
 
             try
             {
@@ -23,27 +24,33 @@ namespace k2s.Kube
 
                 var pod = GetRawPod(ctx, ns, podName).Result;
 
-                RunKubectlCommand(new List<string>() { "port-forward", $"pod/{podName}", $"{localPort}:{tmpPort}", $"-n {ns}" });
+               return RunKubectlCommand(new List<string>() { "port-forward", $"pods/{podName}", $"{localPort}:{tmpPort}", $"-n {ns}" });
 
                 //await Forward(GetClient(ctx),pod.Content, ns, Convert.ToInt32(tmpPort), localPort);
             }
             catch (Exception e) {
 
-                Console.WriteLine("");
-            
+                return BaseResult.NewError("Error Forwarding Service");
+
             }
         }
-        public async Task PortForwardService(string ctx, string ns, string svc, string svcPort, int localPort) {
-
-            var tmpPort=svcPort.Split(" ")[0];
+        public async Task<BaseResult> PortForwardService(string ctx, string ns, string svc, string svcPort, int localPort) {
+            try
+            {
+                var tmpPort=svcPort.Split(" ")[0];
 
             var pods = await GetRawPodsForService(ctx,ns,svc);
 
 
-            RunKubectlCommand(new List<string>() { "port-forward", $"service/{svc}", $"{localPort}:{tmpPort}", $"-n {ns}" });
+           return RunKubectlCommand(new List<string>() { "port-forward", $"service/{svc}", $"{localPort}:{tmpPort}", $"-n {ns}" });
 
-            //await PortForwardPod(ctx, ns,pods.Content.First().Name(), tmpPort, localPort);
+                //await PortForwardPod(ctx, ns,pods.Content.First().Name(), tmpPort, localPort);
+            }
+            catch (Exception e)
+            {
+                return BaseResult.NewError("Error Forwarding Pod");
 
+            }
 
         }
 

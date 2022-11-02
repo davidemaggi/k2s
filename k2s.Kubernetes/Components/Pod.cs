@@ -23,7 +23,7 @@ namespace k2s.Kube
             {
                 var tmp = await GetRawPods(ctx, ns);
 
-                return BaseResult<List<PodModel>>.NewSuccess(_mapper.Map<List<PodModel>>(tmp.Content));
+                return BaseResult<List<PodModel>>.NewSuccess(_mapper.Map<List<PodModel>>(tmp.Content), $"Retrieved {tmp.Content.Count} pods");
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ namespace k2s.Kube
                 var podList = await GetClient(ctx).CoreV1.ListNamespacedPodAsync(ns);
 
 
-                return BaseResult<List<V1Pod>>.NewSuccess(podList.Items.ToList());
+                return BaseResult<List<V1Pod>>.NewSuccess(podList.Items.ToList(), $"Retrieved {podList.Items.Count} raw pods");
             }
             catch (Exception ex)
             {
@@ -68,7 +68,7 @@ namespace k2s.Kube
                 var podList = await GetClient(ctx).CoreV1.ListNamespacedPodAsync(ns);
 
 
-                return BaseResult<V1Pod>.NewSuccess(podList.Items.Where(x => x.Name() == pod).FirstOrDefault());
+                return BaseResult<V1Pod>.NewSuccess(podList.Items.Where(x => x.Name() == pod).FirstOrDefault(), $"Get raw Pod");
             }
             catch (Exception ex)
             {
@@ -102,7 +102,7 @@ namespace k2s.Kube
                 var podList = await GetClient(ctx).CoreV1.ListNamespacedPodAsync(namespaceParameter:ns, labelSelector:labelStr);
 
 
-                return BaseResult<List<V1Pod>>.NewSuccess(podList.Items.ToList());
+                return BaseResult<List<V1Pod>>.NewSuccess(podList.Items.ToList(), $"retireved {podList.Items.Count} raw pods");
             }
             catch (Exception ex)
             {
@@ -127,7 +127,7 @@ namespace k2s.Kube
 
                 var pods =  GetRawPods(ctx, ns, service.Content.Spec.Selector).Result;
 
-                return BaseResult<List<V1Pod>>.NewSuccess(pods.Content);
+                return BaseResult<List<V1Pod>>.NewSuccess(pods.Content, $"Retrieved pods for service");
 
             }
 

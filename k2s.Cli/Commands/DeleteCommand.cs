@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace k2s.Cli.Commands
 {
-    public class DeleteCommandSettings : CommandSettings { }
+    public class DeleteCommandSettings : GlobalSettings { }
     public class DeleteCommand : AsyncCommand<DeleteCommandSettings>
     {
 
@@ -26,6 +26,10 @@ namespace k2s.Cli.Commands
         }
         public override async Task<int> ExecuteAsync(CommandContext context, DeleteCommandSettings settings)
         {
+            Statics.setGlobals(settings);
+
+            var setOver = _kube.SetOverrideFile(settings.KubeConfigFile);
+            if (!setOver.isSuccess()) { Outputs.Warning("KubeConfig File", $"{setOver.Msg}"); }
 
             var contexts = _kube.GetContexts();
             ErrorHandler<List<ContextModel>>.HandleResult(contexts);

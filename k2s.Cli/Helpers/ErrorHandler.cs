@@ -12,6 +12,8 @@ namespace k2s.Cli.Helpers
 
         public static void HandleResult(BaseResult res,string prefix="", bool verbose=false) {
 
+            if (!verbose) { verbose = Statics.Verbose; }
+
             if (res.isSuccess()) { 
                 
                 if(verbose) Outputs.Success(string.IsNullOrWhiteSpace(prefix)? "Success":prefix, res.Msg);
@@ -33,11 +35,13 @@ namespace k2s.Cli.Helpers
                     if (res.Result == ActionResultType.Fatal)
                     {
                         Outputs.Error(string.IsNullOrWhiteSpace(prefix) ? "Fatal" : prefix, res.Msg);
-                        Environment.Exit(1);
+                        Environment.Exit(666);
                         return;
                     }
                     else {
                         Outputs.Error(string.IsNullOrWhiteSpace(prefix) ? "Error" : prefix, res.Msg);
+                        Environment.Exit(1);
+
                         return;
                     }
 
@@ -62,7 +66,7 @@ namespace k2s.Cli.Helpers
 
         public static void HandleResult(BaseResult<T> res, string prefix = "", bool verbose = false)
         {
-
+            if (!verbose) { verbose = Statics.Verbose; }
             if (res.isSuccess())
             {
 

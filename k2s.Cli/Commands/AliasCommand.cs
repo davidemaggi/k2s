@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace k2s.Cli.Commands
 {
-    public class AliasCommandSettings : CommandSettings { }
+    public class AliasCommandSettings : GlobalSettings { }
     public class AliasCommand : AsyncCommand<AliasCommandSettings>
     {
 
@@ -26,6 +26,9 @@ namespace k2s.Cli.Commands
         }
         public override async Task<int> ExecuteAsync(CommandContext context, AliasCommandSettings settings)
         {
+            Statics.setGlobals(settings);
+            var setOver = _kube.SetOverrideFile(settings.KubeConfigFile);
+            if (!setOver.isSuccess()){Outputs.Warning("KubeConfig File", $"{setOver.Msg}"); }
 
             var contexts = _kube.GetContexts();
             ErrorHandler<List<ContextModel>>.HandleResult(contexts);

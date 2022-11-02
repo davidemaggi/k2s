@@ -7,6 +7,9 @@ namespace k2s.Kube
 {
     public interface IKubernetesService
     {
+
+        BaseResult SetOverrideFile(string file);
+
         BaseResult<List<ContextModel>> GetContexts();
         Task<BaseResult<List<NamespaceModel>>> GetNamespaces(string ctx = null);
         string GetConfigPath();
@@ -32,8 +35,8 @@ namespace k2s.Kube
 
         Task<BaseResult<List<V1Pod>>> GetRawPodsForService(string ctx, string ns, string svc);
 
-        Task PortForwardPod(string ctx, string ns, string podName, string svcPort, int localPort);
-        Task PortForwardService(string ctx, string ns, string svc, string svcPort, int localPort);
+        Task<BaseResult> PortForwardPod(string ctx, string ns, string podName, string svcPort, int localPort);
+        Task<BaseResult> PortForwardService(string ctx, string ns, string svc, string svcPort, int localPort);
 
     }
 }

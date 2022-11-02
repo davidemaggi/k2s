@@ -21,7 +21,7 @@ namespace k2s.Kube
                 var tmp = await GetRawServices(ctx, ns);
 
 
-                return BaseResult<List<ServiceModel>>.NewSuccess(_mapper.Map<List<ServiceModel>>(tmp.Content));
+                return BaseResult<List<ServiceModel>>.NewSuccess(_mapper.Map<List<ServiceModel>>(tmp.Content), $"Retrieved {tmp.Content.Count} Services");
             }
             catch (Exception ex)
             {
@@ -45,7 +45,7 @@ namespace k2s.Kube
                 var svcList = await GetClient(ctx).CoreV1.ListNamespacedServiceAsync(ns);
 
 
-                return BaseResult<List<V1Service>>.NewSuccess(svcList.Items.ToList());
+                return BaseResult<List<V1Service>>.NewSuccess(svcList.Items.ToList(), $"Retrieved {svcList.Items.Count} raw serrvices");
             }
             catch (Exception ex)
             {
@@ -71,7 +71,7 @@ namespace k2s.Kube
 
                 var lll = svcList.Items.Where(x => x.Name() == svc).FirstOrDefault();
 
-                return BaseResult<V1Service>.NewSuccess(lll);
+                return BaseResult<V1Service>.NewSuccess(lll, $"Retrieved Service");
             }
             catch (Exception ex)
             {

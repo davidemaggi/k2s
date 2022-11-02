@@ -14,7 +14,7 @@ using System.Reflection;
 
 namespace k2s.Cli.Commands
 {
-    public class InfoCommandSettings : CommandSettings { }
+    public class InfoCommandSettings : GlobalSettings { }
 
     public class InfoCommand : AsyncCommand<InfoCommandSettings>
     {
@@ -28,6 +28,11 @@ namespace k2s.Cli.Commands
 
         public override async Task<int> ExecuteAsync(CommandContext context, InfoCommandSettings settings)
         {
+            Statics.setGlobals(settings);
+
+            var setOver =_kube.SetOverrideFile(settings.KubeConfigFile);
+
+
             // details are omitted for brevity
             // the actual implementation parses HTML file and collects bots
             AnsiConsole.Write(new Rows(
@@ -54,6 +59,24 @@ new Text("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⠛⠛⠛⠛⠛⠉⠉")
 
             AnsiConsole.MarkupLine($"[grey]v{GetAssemblyVersionInfo()}[/]");
             AnsiConsole.MarkupLine($"");
+
+            var curpath = _kube.GetConfigPath();
+
+            if (setOver.isSuccess()) {
+
+                Outputs.Success("KubeConfig File", $"{curpath}");
+
+
+            }
+            else
+            {
+                Outputs.Warning("KubeConfig File", $"{setOver.Msg}");
+
+
+            }
+
+
+
 
             var curCtx = _kube.GetCurrentContext();
             ErrorHandler<string>.HandleResult(curCtx);

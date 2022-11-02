@@ -21,11 +21,15 @@ namespace k2s.Cli
 
                 var app = new CommandApp(new TypeRegistrar(services));
 
+                
+
                 app.SetDefaultCommand<WizardCommand>();
 
                 app.Configure(config =>
                 {
                     config.SetApplicationName("k2s");
+
+                    
 
                     config.AddCommand<WizardCommand>("wizard")
                     .WithAlias("w")

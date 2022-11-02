@@ -84,11 +84,11 @@ namespace k2s.Kube
             }
             catch (Exception e) {
 
-                return BaseResult<MergeResult>.NewFatal(ret);
+                return BaseResult<MergeResult>.NewFatal(ret,"Error Merging Files");
 
             }
 
-            return BaseResult<MergeResult>.NewSuccess(ret);
+            return BaseResult<MergeResult>.NewSuccess(ret, $"File Merged");
 
         }
 

@@ -44,7 +44,7 @@ namespace k2s.Kube
 
 
 
-                return BaseResult<List<NamespaceModel>>.NewSuccess(ret.OrderByDescending(o => o.IsCurrent).ToList());
+                return BaseResult<List<NamespaceModel>>.NewSuccess(ret.OrderByDescending(o => o.IsCurrent).ToList(), $"Retrieved {ret.Count} namespace(s)");
 
 
 
@@ -72,7 +72,7 @@ namespace k2s.Kube
                 {
 
                     
-                    return BaseResult<string>.NewSuccess(ctx.ContextDetails.Namespace);
+                    return BaseResult<string>.NewSuccess(ctx.ContextDetails.Namespace, $"Retrieved current namespace");
 
                 }
 
@@ -113,7 +113,7 @@ namespace k2s.Kube
 
                 if (save) return SaveKubeConfig(true);
 
-                return BaseResult.NewSuccess();
+                return BaseResult.NewSuccess($"Namespace Set");
 
             }
             catch (Exception e)

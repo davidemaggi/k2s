@@ -26,13 +26,13 @@ namespace k2s.Kube
 
 
 
-            return BaseResult<List<ContextModel>>.NewSuccess(ret.OrderByDescending(o => o.IsCurrent).ToList());
+            return BaseResult<List<ContextModel>>.NewSuccess(ret.OrderByDescending(o => o.IsCurrent).ToList(),$"Retrieved {ret.Count} contexts");
         }
 
         public BaseResult<string> GetCurrentContext()
         {
 
-            return BaseResult<string>.NewSuccess(_config.CurrentContext);
+            return BaseResult<string>.NewSuccess(_config.CurrentContext, $"Retrieved Current Context");
 
 
         }
@@ -52,7 +52,7 @@ namespace k2s.Kube
 
                 if (save) return SaveKubeConfig(true);
 
-                return BaseResult.NewSuccess();
+                return BaseResult.NewSuccess($"Context Set");
 
             }
             catch (Exception e)

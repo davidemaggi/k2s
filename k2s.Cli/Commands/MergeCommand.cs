@@ -14,7 +14,8 @@ using k2s.Models;
 
 namespace k2s.Cli.Commands
 {
-    public class MergeCommandSettings : CommandSettings {
+    public class MergeCommandSettings : GlobalSettings
+    {
 
         [CommandArgument(0, "<filePath>")]
         public string FilePath { get; set; }
@@ -35,6 +36,10 @@ namespace k2s.Cli.Commands
         {
             // details are omitted for brevity
             // the actual implementation parses HTML file and collects bots
+            Statics.setGlobals(settings);
+
+            var setOver = _kube.SetOverrideFile(settings.KubeConfigFile);
+            if (!setOver.isSuccess()) { Outputs.Warning("KubeConfig File", $"{setOver.Msg}"); }
 
             Outputs.Info("Merging",settings.FilePath);
             Outputs.Info("Into",_kube.GetConfigPath());
