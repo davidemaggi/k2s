@@ -87,7 +87,6 @@ k2s is making its first baby steps, It's available as standalone binaries for al
 2. Copy k2s executable file to an accessible directory on your PC(e.g /usr/bin)
 3. Add the Folder to your PATH Environment variable, if not already configured
 4. Enjoy k2s
-5. 
 ### Windows 🪟
 #### Manual 🔨
 1. Download the binary that fits your OS from [Release](https://github.com/davidemaggi/k2s/releases) page
