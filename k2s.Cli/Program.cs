@@ -43,7 +43,7 @@ namespace k2s.Cli
                 .WithAlias("a")
                 .WithDescription("Change Context Name to an alias");
 
-                    config.AddCommand<AliasCommand>("delete")
+                    config.AddCommand<DeleteCommand>("delete")
                    .WithAlias("d")
                    .WithDescription("Delete context from KubeConfig");
 

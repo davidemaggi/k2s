@@ -29,28 +29,22 @@ namespace k2s.Cli.Commands
             // details are omitted for brevity
             // the actual implementation parses HTML file and collects bots
 
-            
 
-            var contexts =  _kube.GetContexts();
-            ErrorHandler<List<ContextModel>>.HandleResult(contexts);
 
-            var fwdCtx = AnsiConsole.Prompt(
-    new SelectionPrompt<string>()
-        .Title("Which [green]Context[/]?")
-        .PageSize(10)
-        .MoreChoicesText("[grey](Move up and down to reveal more coontext)[/]")
-        .AddChoices(contexts.Content.Select(x=>x.Name)));
+
+
+            var fwdCtx = _kube.GetCurrentContext().Content;
 
             // Echo the fruit back to the terminal
 
-            Outputs.Success("Selected Context", fwdCtx);
+            Outputs.Success("Forward for Context", fwdCtx);
 
             var namespaces = await _kube.GetNamespaces(fwdCtx);
             
             ErrorHandler<List<NamespaceModel>>.HandleResult(namespaces);
             var fwdNs = AnsiConsole.Prompt(
    new SelectionPrompt<string>()
-       .Title("Which [green]Context[/]?")
+       .Title("Which [green]Namespace[/]?")
        .PageSize(10)
        .MoreChoicesText("[grey](Move up and down to reveal more coontext)[/]")
        .AddChoices(namespaces.Content.Select(x => x.Name)));
@@ -97,7 +91,7 @@ namespace k2s.Cli.Commands
                 var localport = AnsiConsole.Ask<int>("On local [green]port[/]:");
 
                 //Outputs.Success("On Local Port", localport.ToString());
-                _kube.PortForwardPod(fwdCtx, fwdNs, podfwd, port, localport);
+                await _kube.PortForwardPod(fwdCtx, fwdNs, podfwd, port, localport);
 
             }
             else {
@@ -128,7 +122,7 @@ namespace k2s.Cli.Commands
 
                 // Outputs.Success("On Local Port", localport.ToString());
 
-                _kube.PortForwardService(fwdCtx,fwdNs,servicefwd,port,localport);
+                await _kube.PortForwardService(fwdCtx,fwdNs,servicefwd,port,localport);
 
             }
 
