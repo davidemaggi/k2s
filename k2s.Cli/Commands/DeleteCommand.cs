@@ -35,7 +35,7 @@ namespace k2s.Cli.Commands
             ErrorHandler<List<ContextModel>>.HandleResult(contexts);
 
             var deleteCtx = AnsiConsole.Prompt(
-    new SelectionPrompt<string>()
+    new MultiSelectionPrompt<string>()
         .Title("Which context you want to [red]delete[/]?")
         .PageSize(10)
         .MoreChoicesText("[grey](Move up and down to reveal more coontexts)[/]")
@@ -47,9 +47,9 @@ namespace k2s.Cli.Commands
 
             
 
-            if (AnsiConsole.Confirm($"Are you sure ou want to delete [red]{deleteCtx}[/]?"))
+            if (AnsiConsole.Confirm($"Are you sure ou want to delete [red]{string.Join(", ", deleteCtx)}[/]?"))
             {
-                var resDel=_kube.DeleteContext(deleteCtx);
+                var resDel=_kube.DeleteContexts(deleteCtx);
                 ErrorHandler.HandleResult(resDel);
             }
 

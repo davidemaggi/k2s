@@ -1,10 +1,12 @@
 ﻿using k2s.Models;
 using k2s.Models.k8s;
+using k8s.KubeConfigModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace k2s.Kube
 {
@@ -78,23 +80,74 @@ namespace k2s.Kube
         
         }
 
+        public BaseResult DeleteContexts(List<string> deleteCtxs)
+        {
 
-        public BaseResult DeleteContext(string deleteCtx)
+            foreach (string ctx in deleteCtxs) {
+
+                var tmpRes = DeleteContext(ctx,false);
+
+                if (!tmpRes.isOk()) {
+
+                    return BaseResult.NewError($"Error deleting context {ctx}");
+                
+                }
+            
+            }
+            return SaveKubeConfig(true);
+
+
+        }
+
+
+        public BaseResult DeleteContext(string deleteCtx,  bool save=true)
         {
 
             var toDelete = _config.Contexts.Where(x=>x.Name==deleteCtx).FirstOrDefault();
 
             if (toDelete!=null) { 
-            _config.Contexts = _config.Contexts.Where(x => x.Name != deleteCtx);
-            _config.Users = _config.Users.Where(x => x.Name != toDelete.ContextDetails.User);
-            _config.Clusters = _config.Clusters.Where(x => x.Name != toDelete.ContextDetails.Cluster);
 
-            return SaveKubeConfig(true);
+            
+                if (ShouldDeleteUser(_config.Contexts, toDelete.ContextDetails.User)) { 
+                _config.Users = _config.Users.Where(x => x.Name != toDelete.ContextDetails.User).ToList();
+                }
+                if (ShouldDeleteCluster(_config.Contexts, toDelete.ContextDetails.Cluster))
+                {
+                    _config.Clusters = _config.Clusters.Where(x => x.Name != toDelete.ContextDetails.Cluster).ToList();
+                }
+
+                _config.Contexts = _config.Contexts.Where(x => x.Name != deleteCtx).ToList();
+
+                if (save)
+                {
+                    return SaveKubeConfig(true);
+                }
+                else {
+
+                    return BaseResult.NewSuccess("Deleted, waiting for save");
+
+                }
+
             }
 
             return BaseResult.NewWarning("Context to delete has not been found");
         }
 
-        
+        private bool ShouldDeleteCluster(IEnumerable<Context> contexts, string cluster)
+        {
+            
+
+            var nCluster = contexts.Where(x => x.ContextDetails.Cluster == cluster).Count();
+
+            return nCluster == 1;
+
+        }
+
+        private bool ShouldDeleteUser(IEnumerable<Context> contexts, string user)
+        {
+            var nUser = contexts.Where(x => x.ContextDetails.User == user).Count();
+
+            return nUser == 1;
+        }
     }
 }

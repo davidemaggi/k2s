@@ -28,8 +28,8 @@ namespace k2s.Kube
 
         BaseResult SetConfig(K8SConfiguration newConf, bool withSave = false);
         BaseResult RenameContext(string renameCtx, string newName);
-        BaseResult DeleteContext(string deleteCtx);
-
+        BaseResult DeleteContext(string deleteCtx, bool save=true);
+        BaseResult DeleteContexts(List<string> deleteCtxs);
         Task<BaseResult<List<PodModel>>> GetPods(string ctx, string ns);
         Task<BaseResult<List<ServiceModel>>> GetServices(string fwdCtx, string fwdNs);
 
