@@ -86,7 +86,7 @@ namespace k2s.Cli.Commands
 
                 var port = AnsiConsole.Prompt(
    new SelectionPrompt<string>()
-       .Title("Which [green]Service[/] you want to forward?")
+       .Title("Which [green]Port[/] you want to forward?")
        .AddChoices(tmpPod.Ports.Select(x => $"{x.ExternalPort} ({x.Protocol})")));
                 Outputs.Info("Forwarding Port", $"{port}");
 

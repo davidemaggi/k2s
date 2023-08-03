@@ -37,6 +37,7 @@ namespace k2s.Kube
 
         Task<BaseResult> PortForwardPod(string ctx, string ns, string podName, string svcPort, int localPort);
         Task<BaseResult> PortForwardService(string ctx, string ns, string svc, string svcPort, int localPort);
+        Task<BaseResult> ShellConnectPod(string ctx, string ns, string podName);
 
     }
 }
